@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title> Carto web </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!-- intégration fichier css -->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="leaflet/leaflet.css" />
+
+		<!-- intégration fichier JS -->
+		<script type="text/javascript" src="leaflet/leaflet.js"> </script>
+		<script type="text/javascript" src="leaflet/fonction_choropleth.js" > </script>
+		<!-- <script type="text/javascript" src="leaflet/MarkerClusterGroup.js" > </script> -->
+
+
+		
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					 <span class="image avatar"><img src="images/logo_lpo.png" alt="" /></span> 
+					<h1 id="logo"><a href="#">Projet VRA</a></h1>
+					<p>	<ul>Réalisé.e.s par :
+						<li>LPO Auvergne Rhône Alpes</li>
+					</ul></p>
+					<div id='info'> </div>
+				</header>
+
+			
+
+				<nav id="nav">
+
+					<a href="document_test.xlsx" class="button primary icon solid fa-download" download="document_test">Document récapitulatif </a>
+				</nav>
+			</section>
+			<!-- -->
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Two 
+						
+							<section id="two">
+								<div class="container">
+									<h3>Consigne et objectif du projet</h3>
+									<p>
+										A partir des données fournies (en Shapefile) : <br>
+										Créer une webcarto représentant, les lignes de métro, les stations auto-partage et le taux de chômage (attribut « tchom ») par IRIS. <br>
+										La webcarto devra comporter une gestion des calques et les couches devront être stylisées. <br>
+										Votre page (outre la webcarto) comportera DU STYLE.<br><br>
+										
+										L'objectif final étant de mettre un peu de fun dans l'game, ainsi qu'apprendre en s'amusant avec un trinôme de travail qui rayonne de mille feu pour cela nous souhaitons : 
+									</p>
+									<ul class="feature-icons">
+										<li class="icon solid fa-code">Coder l'application cartographique</li>
+										<li class="icon solid fa-cubes">Pouvoir télécharger un fichier</li>
+										<li class="icon solid fa-book">Regarder les bibliothèques de template </li>
+										<li class="icon solid fa-coffee">Boire une petite bière pendant le projet</li>
+										<li class="icon solid fa-bolt">Créer des actions dynamiques</li>
+										<li class="icon solid fa-users">Travailler avec une équipe d'enfert !</li>
+									</ul>
+								</div>
+							</section> -->
+					
+						<!-- Three -->
+						
+							<section id="three">
+								<!-- <div class="container">
+									<h3>Cartographies des tram de Lyon</h3>
+									<p>Vous pouvez visualiser l'ensemble des stations de métro, mais aussi permettre de comprendre les différents revenues par IRIS. <br>
+									Pour mettre un peu de dynamisme il est possible de voir l'etendue à 300 mètres d'une station, mais aussi de pouvoir créer différents points repères le long d'une ligne de tram.</p>
+								</div>	 -->
+								
+									<div id='map'> </div>
+									
+									<div class="container">
+										 Cette cartogrpahie propose la visualisation de différentes données concernant les hérissons		
+									</div>	
+								
+									
+						
+							</section>
+
+					
+			
+						
+
+					</div>	
+				<!-- Footer 
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>Réalisé par Bénédicte Thomas, Flavie Blard et Axel Fourneyron <br>
+									Etudiants du master géographies numériques.
+								</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+					-->
+			</div>
+
+		<!-- Scripts cartographies -->
+		<script src="data_ecu.js"></script>
+		<script src="data_pap_com.js"></script>
+		<script src="data_pap_maille.js"></script>
+		<script src="data_hiron_fenetre.js"></script>
+		<script src="data_hiron_rusti.js"></script>
+		<script src="data_amph_zh.js"></script>
+		<script src="data_amph_com.js"></script>
+		<script src="map.js"></script>
+		
+
+		<!-- Scripts style -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			 <script src="assets/js/main.js"></script>
+
+
+	</body>
+</html>
