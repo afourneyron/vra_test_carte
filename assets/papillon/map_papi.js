@@ -90,7 +90,7 @@ function resetHighlight(e) {
   },onEachFeature: onEachFeature
   }).bindPopup(function(layer){
   return('<b>' + layer.feature.properties.nom_com + '</b> <br> Données : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece);
-  })
+  }).addTo(map);
   
   // Carte des données papillons mailles
   

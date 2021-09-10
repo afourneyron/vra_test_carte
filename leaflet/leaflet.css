@@ -636,5 +636,5 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .leaflet-tooltip-right:before {
 	left: 0;
 	margin-left: -12px;
-	border-right-color: #fff;
+	border-right-color: rgb(255, 255, 255);
 	}

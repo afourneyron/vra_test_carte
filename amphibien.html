@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title> Carto web </title>
+		<meta charset="utf-8" />
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" /> -->
+		<!-- intégration fichier css -->
+		<link rel="stylesheet" href="assets/css/main2.css" />
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" /> -->
+		<link rel="stylesheet" href="leaflet/leaflet.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.0/MarkerCluster.Default.min.css" />
+		<link rel="stylesheet" href="leaflet/feature-legend.css"  />
+		
+		<!-- intégration fichier JS -->
+		<script type="text/javascript" src="leaflet/leaflet.js"> </script>
+		<script type="text/javascript" src="leaflet/fonction_choropleth.js" > </script>
+		<!-- <script type="text/javascript" src="leaflet/MarkerClusterGroup.js" > </script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script> -->
+		<script type="text/javascript" src="leaflet/feature-legend.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+
+
+	</head>
+	<body>
+        	<section id="header">
+				<header>
+					 <!-- <span class="image avatar"><img src="images/logo_lpo.png" alt="" /></span>  -->
+					<h1 id="logo">Projet VRA</h1>
+					<p>	<ul>Réalisé.e.s par :
+						<li>LPO Auvergne Rhône Alpes</li>
+					</ul></p>
+					<div id='info'> </div>
+				</header>
+
+			</section>
+			<div id="wrapper">
+				<!-- Main -->
+					<div id="main">					
+							<section id="three">
+									<div id='map'> </div>
+							</section>
+					</div>	
+			</div>
+
+		<!-- Scripts cartographies -->
+		<script src="assets/amphibien/data_amph_com.js"></script>
+		<script src="assets/amphibien/data_amph_zh.js"></script>
+		<script src="assets/amphibien/map_amph.js"></script>
+
+		
+	</body>
+</html>
