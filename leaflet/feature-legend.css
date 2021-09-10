@@ -1,0 +1,53 @@
+.leaflet-control-feature-legend {
+  background-color: white;
+}
+
+.leaflet-control-feature-legend-title {
+  margin: 3px;
+}
+
+.leaflet-control-feature-legend div {
+  display: table;
+}
+
+.leaflet-control-feature-legend span {
+  vertical-align: middle;
+  display: table-cell;
+  z-index: 1;
+  position: relative;
+}
+
+.leaflet-control-feature-legend i {
+  display: inline-block;
+  padding: 0px 3px 0px 4px;
+  position: relative;
+}
+
+.leaflet-control-feature-legend-toggle {
+  background-image: url("../assets/legend-icon.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  box-shadow: none;
+}
+
+.leaflet-control-feature-legend-contents {
+  /* display: none; */
+display: block;
+padding: 6px 10px 6px 6px;
+overflow-y: auto;
+position: fixed;
+text-align: left;
+color :papayawhip;
+right: 5em;
+bottom: 5%;
+}
+
+.leaflet-control-feature-legend-expanded .leaflet-control-feature-legend-contents {
+  display: block;
+  padding: 6px 10px 6px 6px;
+}
+
+.leaflet-control-feature-legend-contents img {
+  position: absolute;
+  z-index: 100;
+}

@@ -37,7 +37,7 @@
 .leaflet-safari .leaflet-tile-container {
 	width: 1600px;
 	height: 1600px;
-	-webkit-transform-origin: 0 0;
+	/* -webkit-transform-origin: 0 0; */
 	}
 .leaflet-marker-icon,
 .leaflet-marker-shadow {
@@ -267,7 +267,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 /* general typography */
 .leaflet-container {
-	font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font: 20px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
 	}
 
 
