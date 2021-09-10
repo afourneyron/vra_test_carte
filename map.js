@@ -295,9 +295,7 @@ return('<b> Type de zone humide : ' + layer.feature.properties.type +' <br> Zone
 // ------------------------------- Affichage des couches  -------------------------------
 //Fond de plan : OSM
 var baseLayers = {
-  "OpenStreetMap": osm,
-  "Fond CartoDB": CartoDB_Positron,
-  "Photo aérienne": GeoportailFrance_orthos
+  "OpenStreetMap": osm
 };
 
 // Overlays : Couches qui viennent se superposer au fond de plan 
