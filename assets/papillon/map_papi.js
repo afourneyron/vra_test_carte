@@ -1,42 +1,25 @@
 // création de la carte web de base 
 
-var map = L.map('map');
+var map = L.map('map', {
+  zoomDelta: 0.5,
+  zoomSnap: 0,
+  minZoom: 10,
+  maxZoom: 22,
+  zoomControl: true
+});
+
 var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 var osmAttrib = 'Map data © OpenStreetMap Contributeur';
-var osm = new L.TileLayer(osmUrl, {attribution: osmAttrib}).addTo(map);
+var osm = new L.TileLayer(osmUrl, {
+            attribution: osmAttrib,
+            maxZoom: 22,
+            maxNativeZoom: 19
+}).addTo(map);
 
-map.setView([44.858,5.00],12); // définir les paramètre de visualisation de la carte
+map.setView([44.8730682,5.0125748],12); // définir les paramètre de visualisation de la carte
+map.setZoom(11.4)
 
 //------------------------------------ AJOUT DES DONNEES ------------------------------------
-
-
-// ICONE 
-// définition de l'icone des hérissons
-var heri = L.icon({
-  iconUrl: 'assets/mammifere/heri.png',
-  iconSize: [30,20],
-  iconAnchor: [30,20],
-  popupAnchor:  [-10, -20]
-});
-// définition de l'icone des écureuils
-var ecu = L.icon({
-  iconUrl: 'assets/mammifere/ecu.png',
-  iconSize: [30,30],
-  iconAnchor: [30,30],
-  popupAnchor:  [-10, -20]
-});
-
-var heri_symb = L.icon({
-  iconUrl: 'assets/mammifere/heri.png',
-  iconSize: [30,30],
-  popupAnchor:  [0, 0]
-});
-// définition de l'icone des écureuils
-var ecu_symb  = L.icon({
-  iconUrl: 'assets/mammifere/ecu.png',
-  iconSize: [30,30],
-  popupAnchor:  [0, 0]
-});
 
 // FILTRE
 // fonction pour filter les données ecureuils
@@ -49,7 +32,16 @@ var ecu_symb  = L.icon({
 // }
 
 // COUCHE 
-// création de la couche de donnée des écureuils
+
+// limite communale zone d'étude
+var commune_map =L.geoJSON(data_amph_com, {
+  style: {
+    color: '#202020',
+    weight: 2.5,
+    dashArray: '5, 10',
+    fillOpacity: 0.01
+}
+}).addTo(map);
 // Carte des données papillons commune
 
 function resetHighlight(e) {
@@ -66,7 +58,7 @@ function resetHighlight(e) {
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
           e.target.bringToFront();
       }
-      var text = '<b>' +  e.target.feature.properties.nom_com + '</b> <br> Données : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèces : '+e.target.feature.properties.nb_espece;
+      var text = '<b>' +  e.target.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+e.target.feature.properties.nb_espece;
       L.DomUtil.get('info').innerHTML = text
   } 
   
@@ -79,9 +71,9 @@ function resetHighlight(e) {
   }
   
   var pap_data_map =L.choropleth(data_papi_com, {
-    valueProperty: 'nb_data',
+    valueProperty: 'nb_espece',
     scale: ['white', 'mediumorchid'],
-    steps: 8, // Nombre de classes
+    steps: 5, // Nombre de classes
     mode: 'q',
     style: {
       color: '#fff',
@@ -89,7 +81,7 @@ function resetHighlight(e) {
       fillOpacity: 0.8
   },onEachFeature: onEachFeature
   }).bindPopup(function(layer){
-  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Données : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece);
+  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece);
   }).addTo(map);
   
   // Carte des données papillons mailles
@@ -108,7 +100,7 @@ function resetHighlight(e) {
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
           e.target.bringToFront();
       }
-      var text = '<br> Données : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèces : '+e.target.feature.properties.nb_espece;
+      var text = '<br> Donnée(s) : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+e.target.feature.properties.nb_espece;
       L.DomUtil.get('info').innerHTML = text
   } 
   
@@ -131,56 +123,60 @@ function resetHighlight(e) {
       fillOpacity: 0.6
   },onEachFeature: onEachFeature2
   }).bindPopup(function(layer){
-  return(' Données : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece);
+  return(' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece);
   })
   
 
 
-// limite communale zone d'étude
-var commune_map =L.geoJSON(data_amph_com, {
-  style: {
-    color: '#202020',
-    weight: 2.5,
-    dashArray: '5, 10',
-    fillOpacity: 0.01
-}
-})
 
 
-// LEGENDE 
+// LEGEND 
 
-// const ecu_symbole = L.marker([51.505, -0.115], { icon: ecu_symb });
-// const heri_symbole = L.marker([51.505, -0.115], { icon: heri_symb });
-
-// const items = {
-//   "Écureuil roux": ecu_symbole,
-//   "Hérisson d'Europe": heri_symbole
-// };
-
-// const legend = L.control.featureLegend(items, {
-//   position: "bottomright",
-//   title: "Légende",
-//   symbolContainerSize: 24,
-//   // symbolScaling: "clamped",
-//   maxSymbolSize: 25,
-//   minSymbolSize: 2,
-//   // collapsed: true,
-//   // drawShadows: true,
-// }).addTo(map);
+  function getColor(d) {
+    return  d >= 80 ? '#ba55d3' :
+            d >= 67 ? '#ce86e0' :
+            d >= 50 ? '#ddaae9' :
+            //d >= 4   ? '#e8c6f0' :
+            '#ffffff';
+  }
+  var legend_com = L.control({position: 'topleft'});
+  legend_com.onAdd = function (map) {
+      var div = L.DomUtil.create('div', 'info legend'),
+          grades = [0, 50, 68, 80];
+  
+      div.innerHTML += '<b> Nombre d\espèces <br> par communes </b> <br>  <br> ';
+      for (var i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+              '<i style="background:' + getColor(grades[i]) + '"></i> ' +  //'   color   ' + getColor(grades[i]) + '  grade  '+ grades[i] + '  -----------  '+ // PARTIE DEBUG
+              grades[i] + (grades[i + 1] ? ' – ' + grades[i+1] + '<br>' : '+');
+      }
+      return div;
+  };
+  legend_com.addTo(map);
+  
+  
+  var legend_zh = L.control({position: 'topleft'});
+  legend_zh.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend')
+    div.innerHTML =  '<i style="background: #4c9ebf"></i> ' + ' Zone humide'
+    return div;
+  };
+  legend_zh.addTo(map);
 
 // ------------------------------- Affichage des couches  -------------------------------
 //Fond de plan : OSM
-var baseLayers = {
-  "OpenStreetMap": osm
-};
+// var baseLayers = {
+//   "OpenStreetMap": osm
+// };
 
 // Overlays : Couches qui viennent se superposer au fond de plan 
 var overlays = {
   "Papillon commune": pap_data_map,
   "Papillon maille": pap_data2_map,
-  "Limite commune":commune_map
+  // "Limite commune":commune_map
 };
-L.control.layers(baseLayers, overlays).addTo(map);
+// L.control.layers(baseLayers, overlays).addTo(map);
+L.control.layers(overlays).addTo(map);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
