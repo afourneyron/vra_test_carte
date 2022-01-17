@@ -139,12 +139,21 @@ function resetHighlight(e) {
             //d >= 4   ? '#e8c6f0' :
             '#ffffff';
   }
+
+  function getColor2(d) {
+    return  d >= 20 ? '#ba55d3' :
+            d >= 10 ? '#ce86e0' :
+            d >= 5 ? '#ddaae9' :
+            //d >= 4   ? '#e8c6f0' :
+            '#ffffff';
+  }
+
   var legend_com = L.control({position: 'topleft'});
   legend_com.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend'),
           grades = [0, 50, 68, 80];
   
-      div.innerHTML += '<b> Nombre d\espèces <br> par communes </b> <br>  <br> ';
+      div.innerHTML += '<b> Nombre d\'espèces <br> par communes </b> <br>  <br> ';
       for (var i = 0; i < grades.length; i++) {
           div.innerHTML +=
               '<i style="background:' + getColor(grades[i]) + '"></i> ' +  //'   color   ' + getColor(grades[i]) + '  grade  '+ grades[i] + '  -----------  '+ // PARTIE DEBUG
@@ -153,15 +162,31 @@ function resetHighlight(e) {
       return div;
   };
   legend_com.addTo(map);
+
+
+  var legend_maille = L.control({position: 'topleft'});
+  legend_maille.onAdd = function (map) {
+      var div = L.DomUtil.create('div', 'info legend'),
+          grades = [0, 5, 10, 20];
   
-  
-  var legend_zh = L.control({position: 'topleft'});
-  legend_zh.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info legend')
-    div.innerHTML =  '<i style="background: #4c9ebf"></i> ' + ' Zone humide'
-    return div;
+      div.innerHTML += '<b> Nombre d\'espèces <br> par maille </b> <br>  <br> ';
+      for (var i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+              '<i style="background:' + getColor2(grades[i]) + '"></i> ' + //'   color   ' + getColor(grades[i]) + '  grade  '+ grades[i] + '  -----------  '+ // PARTIE DEBUG
+              grades[i] + (grades[i + 1] ? ' – ' + grades[i+1] + '<br>' : '+');
+      }
+      return div;
   };
-  legend_zh.addTo(map);
+  legend_maille.addTo(map);
+  
+  
+  // var legend_zh = L.control({position: 'topleft'});
+  // legend_zh.onAdd = function (map) {
+  //   var div = L.DomUtil.create('div', 'info legend')
+  //   div.innerHTML =  '<i style="background: #4c9ebf"></i> ' + ' Zone humide'
+  //   return div;
+  // };
+  // legend_zh.addTo(map);
 
 // ------------------------------- Affichage des couches  -------------------------------
 //Fond de plan : OSM
