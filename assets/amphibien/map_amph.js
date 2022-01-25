@@ -70,7 +70,42 @@ var amph_com_map =L.choropleth(data_amph_com, {
     fillOpacity: 0.8
 },onEachFeature: onEachFeature3
 }).bindPopup(function(layer){
-return('<b>' + layer.feature.properties.nom_com + '</b> <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece);
+      // gestion des colonne des espèces       "": null, "": null, "": null, "": "2019-04-05T00:00:00", "": null
+      var list_esp = ''
+      if(layer.feature.properties['Alyte accoucheur, Crapaud accoucheur']  !== null ){
+        list_esp = list_esp + 'Alyte accoucheur, Crapaud accoucheur : ' + layer.feature.properties['Alyte accoucheur, Crapaud accoucheur']
+      }
+      if(layer.feature.properties['Crapaud calamite']  !== null ){
+        list_esp = list_esp + '<br> Crapaud calamite : ' + layer.feature.properties['Crapaud calamite']
+      }
+      if(layer.feature.properties['Crapaud épineux']  !== null ){
+        list_esp = list_esp + '<br> Crapaud épineux : ' + layer.feature.properties['Crapaud épineux']
+      }
+      if(layer.feature.properties['Grenouille rieuse']  !== null ){
+        list_esp = list_esp + '<br> Grenouille rieuse : ' + layer.feature.properties['Grenouille rieuse']
+      }
+      if(layer.feature.properties['Grenouille agile']  !== null ){
+        list_esp = list_esp + '<br> Grenouille agile : ' + layer.feature.properties['Grenouille agile']
+      }
+      if(layer.feature.properties['Grenouille rousse']  !== null ){
+        list_esp = list_esp + '<br> Grenouille rousse : ' + layer.feature.properties['Grenouille rousse']
+      }
+      if(layer.feature.properties['Pélodyte ponctué']  !== null ){
+        list_esp = list_esp + '<br> Pélodyte ponctué : ' + layer.feature.properties['Pélodyte ponctué']
+      }
+      if(layer.feature.properties['Salamandre tachetée']  !== null ){
+        list_esp = list_esp + '<br> Salamandre tachetée : ' + layer.feature.properties['Salamandre tachetée']
+      }
+      if(layer.feature.properties['Triton crêté']  !== null ){
+        list_esp = list_esp + '<br> Triton crêté : ' + layer.feature.properties['Triton crêté']
+      }
+      if(layer.feature.properties['Triton palmé']  !== null ){
+        list_esp = list_esp + '<br> Triton palmé : ' + layer.feature.properties['Triton palmé']
+      }
+      if(layer.feature.properties['Sonneur à ventre jaune']  !== null ){
+        list_esp = list_esp + '<br> Sonneur à ventre jaune : ' + layer.feature.properties['Sonneur à ventre jaune']
+      }
+return('<b>' + layer.feature.properties.nom_com + '</b> <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece +'<br> Espèces présentes :'+list_esp);
 }).addTo(map);
 
 

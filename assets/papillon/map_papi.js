@@ -81,7 +81,7 @@ function resetHighlight(e) {
       fillOpacity: 0.8
   },onEachFeature: onEachFeature
   }).bindPopup(function(layer){
-  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece);
+  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece); //+  ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece );
   }).addTo(map);
   
   // Carte des données papillons mailles
@@ -100,7 +100,7 @@ function resetHighlight(e) {
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
           e.target.bringToFront();
       }
-      var text = '<br> Donnée(s) : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+e.target.feature.properties.nb_espece;
+      var text = '<br> Donnée(s) : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+e.target.feature.properties.nb_espece+ ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece; 
       L.DomUtil.get('info').innerHTML = text
   } 
   
@@ -123,7 +123,7 @@ function resetHighlight(e) {
       fillOpacity: 0.6
   },onEachFeature: onEachFeature2
   }).bindPopup(function(layer){
-  return(' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece);
+  return(' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece + ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece); 
   })
   
 
