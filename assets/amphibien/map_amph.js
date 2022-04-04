@@ -125,7 +125,7 @@ function highlightFeature4(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         e.target.bringToFront();
     }
-    var text = 'Type de zone humide : ' + e.target.feature.properties.type +' <br> Zone prospecté : '+e.target.feature.properties.prospecte +' <br> Nombre d\'espèces : '+e.target.feature.properties.nb_espece;
+    var text = 'Type de zone humide test : ' + e.target.feature.properties.type +' <br> Zone prospecté : '+e.target.feature.properties.prospecte +' <br> Nombre d\'espèces : '+e.target.feature.properties.nb_espece;
     L.DomUtil.get('info').innerHTML = text
 } 
 
@@ -148,7 +148,61 @@ var amph_zh_map =L.choropleth(data_amph_zh, {
     fillOpacity: 1
 },onEachFeature: onEachFeature4
 }).bindPopup(function(layer){
-return('Type de zone humide : ' + layer.feature.properties.type +' <br> Zone prospecté : '+layer.feature.properties.prospecte +' <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece + '<br>'  );
+
+
+   var list_esp = ''
+   if(layer.feature.properties.nb_espece > 0){
+    list_esp = ''
+    nb_esp = 0
+  if(layer.feature.properties['Triton crêté']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Triton crêté </b>  : <span style="font-size: 14px;">' + layer.feature.properties['Triton crêté'].substr(0, 4) + '</span>  <em style="color:#FCBD00; font-size: 13px;"> (EN)</em>'
+    nb_esp= nb_esp+1
+  }
+  // if(layer.feature.properties['Sonneur à ventre jaune']  !== null ){
+  //   list_esp = list_esp + '<br> <b style="font-size: 16px;"> Sonneur à ventre jaune </b> : <span style="font-size: 14px;">' + layer.feature.properties['Sonneur à ventre jaune'].substr(0, 4) + '</span> <em style="color:#FFED00; font-size: 14px;"> (VU)</em>'
+  // }
+  if(layer.feature.properties['Crapaud calamite']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Crapaud calamite </b> : <span style="font-size: 14px;">' + layer.feature.properties['Crapaud calamite'].substr(0, 4) + '</span> <em style="color:#23221C; font-size: 14px;"> (NT)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Grenouille rousse']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Grenouille rousse </b> : <span style="font-size: 14px;">' + layer.feature.properties['Grenouille rousse'].substr(0, 4) + '</span> <em style="color:#23221C; font-size: 14px;"> (NT)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Pélodyte ponctué']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Pélodyte ponctué </b> : <span style="font-size: 14px;">' + layer.feature.properties['Pélodyte ponctué'].substr(0, 4) + '</span> <em style="color:#23221C; font-size: 14px;"> (NT)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Alyte accoucheur, Crapaud accoucheur']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Crapaud accoucheur </b> : <span style="font-size: 14px;">' + layer.feature.properties['Alyte accoucheur, Crapaud accoucheur'].substr(0, 4) + '</span> <em style="color:#74B94C; font-size: 14px;"> (LC)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Crapaud épineux']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Crapaud épineux </b> : <span style="font-size: 14px;">' + layer.feature.properties['Crapaud épineux'].substr(0, 4) + '</span><em style="color:#74B94C; font-size: 14px;"> (LC)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Grenouille agile']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Grenouille agile </b> : <span style="font-size: 14px;">' + layer.feature.properties['Grenouille agile'].substr(0, 4) + '</span> <em style="color:#74B94C; font-size: 14px;"> (LC)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Salamandre tachetée']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Salamandre tachetée </b> : <span style="font-size: 14px;">' + layer.feature.properties['Salamandre tachetée'].substr(0, 4) + '</span> <em style="color:#74B94C; font-size: 14px;"> (LC)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Triton palmé']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Triton palmé </b> : <span style="font-size: 14px;">' + layer.feature.properties['Triton palmé'].substr(0, 4) + '</span> <em style="color:#74B94C; font-size: 14px;"> (LC)</em>'
+    nb_esp= nb_esp+1
+  }
+  if(layer.feature.properties['Grenouille rieuse']  !== null ){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Grenouille rieuse </b> : <span style="font-size: 14px;">' + layer.feature.properties['Grenouille rieuse'].substr(0, 4) + '</span> <em style="color:grey; font-size: 14px;"> (NA) </em>'
+    nb_esp= nb_esp+1
+  }
+  delta = layer.feature.properties.nb_espece - nb_esp
+  if(delta > 0){
+    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Sonneur à ventre jaune </b> <em style="color:#FFED00; font-size: 14px;"> (VU)</em>'
+  }
+}
+return('Type de zone humide : ' + layer.feature.properties.type +' <br> Zone prospecté : '+layer.feature.properties.prospecte +' <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece + '<hr>' +list_esp );
 })
   
 
