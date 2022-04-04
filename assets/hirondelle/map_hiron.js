@@ -100,7 +100,7 @@ map_full_hironrus.bindPopup(function(layer) {
   return ( '<b>'+ layer.feature.properties.nom_vern +
       '</b> <br> Année : '+ layer.feature.properties.annee +
            '<br> Nombre de nid :' + nb_nid + 
-           '<br> Observateur :' + layer.feature.properties.observers + 
+           //'<br> Observateur :' + layer.feature.properties.observers + 
            '<br> Commentaire :' + layer.feature.properties.comment_description )}); 
 map.addLayer(map_full_hironrus);
 
@@ -129,7 +129,7 @@ map_full_hironfen.bindPopup(function(layer) {
   return ( '<b>'+ layer.feature.properties.nom_vern +
       '</b> <br> Année : '+ layer.feature.properties.annee +
            '<br> Nombre de nid :' + nb_nid + 
-           '<br> Observateur :' + layer.feature.properties.observers + 
+           //'<br> Observateur :' + layer.feature.properties.observers + 
            '<br> Commentaire :' + layer.feature.properties.comment_description )}); 
 //map.addLayer(map_full_hironfen);
 
