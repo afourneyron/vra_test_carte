@@ -150,7 +150,7 @@ var overlays = {
   "Hérisson": map_full_heri,
   // "Limite commune":commune_map
 };
-L.control.layers(overlays, {collapsed: false} ).addTo(map);
+L.control.layers(overlays, null, {collapsed: false} ).addTo(map);
 // rajout de la couche de fond de carte
 // L.control.layers(baseLayers, overlays).addTo(map);
 

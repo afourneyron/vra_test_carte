@@ -167,7 +167,7 @@ var overlays = {
   "Hirondelle de Fenêtre": map_full_hironfen,
   // "Limite commune":commune_map
 };
-L.control.layers(overlays, {collapsed: false} ).addTo(map);
+L.control.layers(overlays, null, {collapsed: false} ).addTo(map);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
