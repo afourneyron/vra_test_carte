@@ -197,12 +197,8 @@ var amph_zh_map =L.choropleth(data_amph_zh, {
     list_esp = list_esp + '<br> <b style="font-size: 16px;"> Grenouille rieuse </b> : <span style="font-size: 14px;">' + layer.feature.properties['Grenouille rieuse'].substr(0, 4) + '</span> <em style="color:grey; font-size: 14px;"> (NA) </em>'
     nb_esp= nb_esp+1
   }
-  delta = layer.feature.properties.nb_espece - nb_esp
-  if(delta > 0){
-    list_esp = list_esp + '<br> <b style="font-size: 16px;"> Sonneur à ventre jaune </b> <em style="color:#FFED00; font-size: 14px;"> (VU)</em>'
-  }
 }
-return('Type de zone humide : ' + layer.feature.properties.type +' <br> Zone prospecté : '+layer.feature.properties.prospecte +' <br> Nombre d\'espèces : '+layer.feature.properties.nb_espece + '<hr>' +list_esp );
+return('Type de zone humide : ' + layer.feature.properties.type +' <br> Zone prospecté : '+layer.feature.properties.prospecte +' <br> Nombre d\'espèces : '+nb_esp + '<hr>' +list_esp );
 })
   
 
