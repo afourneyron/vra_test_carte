@@ -132,7 +132,7 @@ function style(feature) {
   return {
       fillColor: getColor(feature.properties.nb_espece),
       weight: 2,
-      fillOpacity: 0.6,
+      fillOpacity: 0.8,
       color: 'white'
   };
 }
@@ -141,7 +141,7 @@ function style(feature) {
     return  d >= 80 ? '#ba55d3' :
             d >= 67 ? '#ce86e0' :
             d >= 50 ? '#ddaae9' :
-            d >= 0   ? '#e8c6f0' :
+            d > 0   ? '#e8c6f0' :
             '#ffffff';
   }
 
@@ -149,7 +149,7 @@ function style(feature) {
     return {
         fillColor: getColor2(feature.properties.nb_espece),
         weight: 2,
-        fillOpacity: 0.6,
+        fillOpacity: 0.7,
         color: 'white'
     };
   }
@@ -157,14 +157,14 @@ function style(feature) {
     return  d >= 20 ? '#ba55d3' :
             d >= 10 ? '#ce86e0' :
             d >= 5 ? '#ddaae9' :
-            d >= 0   ? '#e8c6f0' :
+            d > 0   ? '#e8c6f0' :
             '#ffffff';
   }
 
   var legend_com = L.control({position: 'topleft'});
   legend_com.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend'),
-          grades = [0,1, 50, 68, 80];
+          grades = [1, 50, 68, 80];
   
       div.innerHTML += '<b> Nombre d\'espèces <br> par communes </b> <br>  <br> ';
       for (var i = 0; i < grades.length; i++) {
@@ -184,9 +184,17 @@ function style(feature) {
   
       div.innerHTML += '<b> Nombre d\'espèces <br> par maille 500x500m </b> <br>  <br> ';
       for (var i = 0; i < grades.length; i++) {
+
+        if(i == 0){
           div.innerHTML +=
-              '<i style="background:' + getColor2(grades[i]) + '"></i> ' + //'   color   ' + getColor(grades[i]) + '  grade  '+ grades[i] + '  -----------  '+ // PARTIE DEBUG
-              grades[i] + (grades[i+1] ? ' – ' + grades[i+1] + '<br>' : '+');
+          '<i style="background:' + getColor2(grades[i]) + '"></i> ' + //'   color   ' + getColor(grades[i]) + '  grade  '+ grades[i] + '  -----------  '+ // PARTIE DEBUG
+           '0 <br>' ;
+        } else {
+          div.innerHTML +=
+          '<i style="background:' + getColor2(grades[i]) + '"></i> ' + //'   color   ' + getColor(grades[i]) + '  grade  '+ grades[i] + '  -----------  '+ // PARTIE DEBUG
+          grades[i] + (grades[i+1] ? ' – ' + grades[i+1] + '<br>' : '+');
+        }
+
       }
       return div;
   };
@@ -213,8 +221,10 @@ var overlays = {
   "Papillon maille": pap_data2_map,
   // "Limite commune":commune_map
 };
+
+
 // L.control.layers(baseLayers, overlays).addTo(map);
-L.control.layers(overlays).addTo(map);
+L.control.layers(overlays,null, {collapsed: false} ).addTo(map);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

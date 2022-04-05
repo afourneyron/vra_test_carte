@@ -248,7 +248,7 @@ var overlays = {
   "Amphibien Zone Humide": amph_zh_map
   // "Limite commune":commune_map
 };
-L.control.layers( overlays).addTo(map);
+L.control.layers( overlays, {collapsed: false} ).addTo(map);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
