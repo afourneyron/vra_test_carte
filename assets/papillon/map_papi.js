@@ -70,18 +70,13 @@ function resetHighlight(e) {
     });
   }
   
-  var pap_data_map =L.choropleth(data_papi_com, {
-    valueProperty: 'nb_espece',
-    scale: ['white', 'mediumorchid'],
-    steps: 5, // Nombre de classes
-    mode: 'q',
-    style: {
-      color: '#fff',
-      weight: 2,
-      fillOpacity: 0.8
-  },onEachFeature: onEachFeature
+
+
+  var pap_data_map =L.geoJson(data_papi_com, {
+    style: style,
+    onEachFeature: onEachFeature
   }).bindPopup(function(layer){
-  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece); //+  ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece );
+  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece+'<br> Liste d\'espèce(s) :'+layer.feature.properties.list_espece ); //+  ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece );
   }).addTo(map);
   
   // Carte des données papillons mailles
@@ -113,15 +108,17 @@ function resetHighlight(e) {
   }
   
   var pap_data2_map =L.choropleth(data_papi_maille, {
-    valueProperty: 'nb_espece',
-    scale: ['white', 'mediumorchid'],
-    steps: 4, // Nombre de classes
-    mode: 'q',
-    style: {
-      color: '#fff',
-      weight: 2,
-      fillOpacity: 0.6
-  },onEachFeature: onEachFeature2
+  //   valueProperty: 'nb_espece',
+  //   scale: ['white', 'mediumorchid'],
+  //   steps: 4, // Nombre de classes
+  //   mode: 'q',
+  //   style: {
+  //     color: '#fff',
+  //     weight: 2,
+  //     fillOpacity: 0.6
+  // }
+  style : style2
+  ,onEachFeature: onEachFeature2
   }).bindPopup(function(layer){
   return(' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece + ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece); 
   })
@@ -131,27 +128,43 @@ function resetHighlight(e) {
 
 
 // LEGEND 
+function style(feature) {
+  return {
+      fillColor: getColor(feature.properties.nb_espece),
+      weight: 2,
+      fillOpacity: 0.6,
+      color: 'white'
+  };
+}
 
   function getColor(d) {
     return  d >= 80 ? '#ba55d3' :
             d >= 67 ? '#ce86e0' :
             d >= 50 ? '#ddaae9' :
-            //d >= 4   ? '#e8c6f0' :
+            d >= 0   ? '#e8c6f0' :
             '#ffffff';
   }
 
+  function style2(feature) {
+    return {
+        fillColor: getColor2(feature.properties.nb_espece),
+        weight: 2,
+        fillOpacity: 0.6,
+        color: 'white'
+    };
+  }
   function getColor2(d) {
     return  d >= 20 ? '#ba55d3' :
             d >= 10 ? '#ce86e0' :
             d >= 5 ? '#ddaae9' :
-            //d >= 4   ? '#e8c6f0' :
+            d >= 0   ? '#e8c6f0' :
             '#ffffff';
   }
 
   var legend_com = L.control({position: 'topleft'});
   legend_com.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend'),
-          grades = [0, 50, 68, 80];
+          grades = [0,1, 50, 68, 80];
   
       div.innerHTML += '<b> Nombre d\'espèces <br> par communes </b> <br>  <br> ';
       for (var i = 0; i < grades.length; i++) {
@@ -167,13 +180,13 @@ function resetHighlight(e) {
   var legend_maille = L.control({position: 'topleft'});
   legend_maille.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend'),
-          grades = [0, 5, 10, 20];
+          grades = [0,1, 5, 10, 20];
   
-      div.innerHTML += '<b> Nombre d\'espèces <br> par maille </b> <br>  <br> ';
+      div.innerHTML += '<b> Nombre d\'espèces <br> par maille 500x500m </b> <br>  <br> ';
       for (var i = 0; i < grades.length; i++) {
           div.innerHTML +=
               '<i style="background:' + getColor2(grades[i]) + '"></i> ' + //'   color   ' + getColor(grades[i]) + '  grade  '+ grades[i] + '  -----------  '+ // PARTIE DEBUG
-              grades[i] + (grades[i + 1] ? ' – ' + grades[i+1] + '<br>' : '+');
+              grades[i] + (grades[i+1] ? ' – ' + grades[i+1] + '<br>' : '+');
       }
       return div;
   };
