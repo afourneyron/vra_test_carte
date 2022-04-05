@@ -125,7 +125,7 @@ function highlightFeature4(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         e.target.bringToFront();
     }
-    var text = 'Type de zone humide test : ' + e.target.feature.properties.type +' <br> Zone prospecté : '+e.target.feature.properties.prospecte +' <br> Nombre d\'espèces : '+e.target.feature.properties.nb_espece;
+    var text = 'Type de zone humide test : ' + e.target.feature.properties.type +' <br> Zone prospectée : '+e.target.feature.properties.prospecte +' <br> Nombre d\'espèces : '+e.target.feature.properties.nb_espece;
     L.DomUtil.get('info').innerHTML = text
 } 
 
@@ -198,7 +198,7 @@ var amph_zh_map =L.choropleth(data_amph_zh, {
     nb_esp= nb_esp+1
   }
 }
-return('Type de zone humide : ' + layer.feature.properties.type +' <br> Zone prospecté : '+layer.feature.properties.prospecte +' <br> Nombre d\'espèces : '+nb_esp + '<hr>' +list_esp );
+return('Type de zone humide : ' + layer.feature.properties.type +' <br> Zone prospectée : '+layer.feature.properties.prospecte +' <br> Nombre d\'espèces : '+nb_esp + '<hr>' +list_esp );
 })
   
 
@@ -217,7 +217,7 @@ legend_com.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 4, 7, 8, 9];
 
-    div.innerHTML += '<b> Nombre d\espèces </b> <br> <br>';
+    div.innerHTML += '<b> Nombre d\'espèces </b> <br> <br>';
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
             '<i style="background:' + getColor(grades[i]) + '"></i> ' +
@@ -244,8 +244,8 @@ legend_zh.addTo(map);
 
 // Overlays : Couches qui viennent se superposer au fond de plan 
 var overlays = {
-  "Amphibien commune": amph_com_map,
-  "Amphibien Zone Humide": amph_zh_map
+  "Synthèse : Commune": amph_com_map,
+  "Synthèse : Zone Humide": amph_zh_map
   // "Limite commune":commune_map
 };
 L.control.layers( overlays, null, {collapsed: false}  ).addTo(map);

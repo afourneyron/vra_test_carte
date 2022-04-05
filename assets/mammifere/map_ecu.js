@@ -85,7 +85,7 @@ var map_full_ecu = L.markerClusterGroup();
 map_full_ecu.addLayer(map_ecu)
 map_full_ecu.bindPopup(function(layer) { 
   return ( '<b>'+ layer.feature.properties.nom_vern +
-      '</b> <br> Nombre d\'observation : '+ layer.feature.properties.nb_ )}); 
+      '</b> <br> Nombre d\'observation(s) : '+ layer.feature.properties.nb_ )}); 
 map.addLayer(map_full_ecu);
 
 // création de la couche de donnée des hérissons
@@ -102,7 +102,7 @@ var map_full_heri = L.markerClusterGroup();
 map_full_heri.addLayer(map_heri)
 map_full_heri.bindPopup(function(layer) { 
   return ( '<b>'+ layer.feature.properties.nom_vern +
-      '</b> <br> Nombre d\'observation : '+ layer.feature.properties.nb_ )}); 
+      '</b> <br> Nombre d\'observation(s) : '+ layer.feature.properties.nb_ )}); 
 //map.addLayer(map_full_heri);
 
 
@@ -150,7 +150,7 @@ var overlays = {
   "Hérisson": map_full_heri,
   // "Limite commune":commune_map
 };
-L.control.layers(overlays, null, {collapsed: false} ).addTo(map);
+L.control.layers(overlays, null, {collapsed: false, } ).addTo(map);
 // rajout de la couche de fond de carte
 // L.control.layers(baseLayers, overlays).addTo(map);
 

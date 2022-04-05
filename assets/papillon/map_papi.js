@@ -76,7 +76,7 @@ function resetHighlight(e) {
     style: style,
     onEachFeature: onEachFeature
   }).bindPopup(function(layer){
-  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece+'<br> Liste d\'espèce(s) :'+layer.feature.properties.list_espece ); //+  ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece );
+  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece+' <br> Liste d\'espèce(s) : <span style="font-size: 12px;">'+layer.feature.properties.list_espece+'</span>' ); //+  ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece );
   }).addTo(map);
   
   // Carte des données papillons mailles
@@ -95,7 +95,7 @@ function resetHighlight(e) {
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
           e.target.bringToFront();
       }
-      var text = '<br> Donnée(s) : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+e.target.feature.properties.nb_espece+ ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece; 
+      var text = '<br> Donnée(s) : ' + e.target.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+e.target.feature.properties.nb_espece+ ' <br> Liste d\'espèce(s) : <span style="font-size: 12px;">'+layer.feature.properties.list_espece+'</span>'; 
       L.DomUtil.get('info').innerHTML = text
   } 
   
@@ -120,7 +120,15 @@ function resetHighlight(e) {
   style : style2
   ,onEachFeature: onEachFeature2
   }).bindPopup(function(layer){
-  return(' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece + ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece); 
+
+    if(layer.feature.properties.nb_espece > 0){
+      text = ' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece + ' <br> Liste d\'espèce(s) : <span style="font-size: 12px;">'+layer.feature.properties.list_espece+'</span>'
+    }
+    else {
+      text = ' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece 
+    }
+
+  return(text); 
   })
   
 
@@ -217,8 +225,8 @@ function style(feature) {
 
 // Overlays : Couches qui viennent se superposer au fond de plan 
 var overlays = {
-  "Papillon commune": pap_data_map,
-  "Papillon maille": pap_data2_map,
+  "Synthèse : Commune": pap_data_map,
+  "Synthèse : Maille": pap_data2_map,
   // "Limite commune":commune_map
 };
 
