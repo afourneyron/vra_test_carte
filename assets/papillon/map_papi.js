@@ -76,7 +76,15 @@ function resetHighlight(e) {
     style: style,
     onEachFeature: onEachFeature
   }).bindPopup(function(layer){
-  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece+' <br> Liste d\'espèce(s) : <span style="font-size: 12px;">'+layer.feature.properties.list_espece+'</span>' ); //+  ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece );
+
+    var_list_esp = ''
+    if(layer.feature.properties.list_espece_pro != null){
+      var_list_esp = var_list_esp+' <br> Liste d\'espèce(s) protégée(s): <span style="font-size: 12px;">'+layer.feature.properties.list_espece_pro+'</span>' 
+    }
+    if(layer.feature.properties.list_espece_non_pro != null){
+      var_list_esp = var_list_esp+' <br> Liste d\'espèce(s) non protégée(s): <span style="font-size: 12px;">'+layer.feature.properties.list_espece_non_pro+'</span>' 
+    }
+  return('<b>' + layer.feature.properties.nom_com + '</b> <br> Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece + var_list_esp); //+  ' <br> Liste d\'espèce(s) : '+layer.feature.properties.list_espece );
   }).addTo(map);
   
   // Carte des données papillons mailles
@@ -120,15 +128,22 @@ function resetHighlight(e) {
   style : style2
   ,onEachFeature: onEachFeature2
   }).bindPopup(function(layer){
-
+    if(layer.feature.properties.nb_data != null){
+      nb_data = layer.feature.properties.nb_data
+    } else {
+      nb_data = 0
+    }
+    var_list_esp = ''
     if(layer.feature.properties.nb_espece > 0){
-      text = ' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece + ' <br> Liste d\'espèce(s) : <span style="font-size: 12px;">'+layer.feature.properties.list_espece+'</span>'
+      var_list_esp = var_list_esp+' <br> Liste d\'espèce(s) : <hr>' 
     }
-    else {
-      text = ' Donnée(s) : ' + layer.feature.properties.nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece 
+    if(layer.feature.properties.list_espece_pro != null){
+      var_list_esp = var_list_esp+' <span style="color:#FCBD00; font-size: 14px;"> Protégée(s): </span>  <span style="font-size: 12px;">'+layer.feature.properties.list_espece_pro+'</span><br> ' 
     }
-
-  return(text); 
+    if(layer.feature.properties.list_espece_non_pro != null){
+      var_list_esp = var_list_esp+'  <span style="color:#74B94C; font-size: 14px;"> Non protégée(s): </span>  <span style="font-size: 12px;">'+layer.feature.properties.list_espece_non_pro+'</span><br>' 
+    }
+  return(' Donnée(s) : ' + nb_data + ' <br> Nombre d\'espèce(s) : '+layer.feature.properties.nb_espece + var_list_esp); 
   })
   
 
@@ -154,12 +169,21 @@ function style(feature) {
   }
 
   function style2(feature) {
-    return {
+    if(feature.properties.nb_espece > 0){
+      return {
+          fillColor: getColor2(feature.properties.nb_espece),
+          weight: 2,
+          fillOpacity: 0.8,
+          color: 'white'
+      };
+    } else {
+      return {
         fillColor: getColor2(feature.properties.nb_espece),
         weight: 2,
-        fillOpacity: 0.7,
+        fillOpacity: 0.01,
         color: 'white'
     };
+    }
   }
   function getColor2(d) {
     return  d >= 20 ? '#ba55d3' :
